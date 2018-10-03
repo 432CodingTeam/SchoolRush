@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const isTest    = true
 const test_root = "http://localhost/SchoolRushServer/public/?s="
-//const test_root = "http://localhost/SchoolRushServer/public/?s="
 const pub_root = "http://api.iimt.me/public/?s="
 let   root     = isTest ? test_root : pub_root
 //设置axios为form-data
