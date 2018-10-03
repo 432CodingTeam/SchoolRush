@@ -35,7 +35,6 @@
                   <li>
                     <router-link :to="'/campus/' + userInfo.campusID">高校</router-link>
                   </li>
-                  
                 </ul>
               </div>
               <div class="search-container">
@@ -176,9 +175,6 @@ export default {
 };
 </script>
 <style lang="sass">
-  @import "../../static/sass/grid.sass"
-  @import "../../static/sass/common.sass"
-
   $bright-blue: #0084ff
   $nav-height: 5rem
   body
@@ -297,8 +293,6 @@ export default {
   .ivu-modal-body
     padding: 1rem 1.6rem
     padding-bottom: 0
-    
-  
   .dropdown-link
     color: #495060
   @media (max-width: 500px)

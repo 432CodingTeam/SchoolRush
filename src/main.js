@@ -8,6 +8,7 @@ import App from './app.vue';
 import API from "../HTTP/main"
 import Cookie from "./static/plugins/cookie"
 import 'iview/dist/styles/iview.css';
+import "./static/css/main.css"
 
 
 Vue.use(VueRouter)

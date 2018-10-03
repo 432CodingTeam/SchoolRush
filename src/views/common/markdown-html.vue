@@ -1,5 +1,5 @@
 <template>
-  <div id="markdown" v-html="html">
+  <div id="markdown" class="markdown-body" v-html="html">
   </div>
 </template>
 <script>
@@ -23,6 +23,7 @@ export default {
 }
 </script>
 <style lang="sass">
+@import "../../static/css/markdown.css"
 #markdown
   p
     img
