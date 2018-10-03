@@ -21,3 +21,8 @@
         }
     }
 </script>
+<style <style lang="sass">
+    @import "./static/sass/grid.sass"
+    @import "./static/sass/common.sass"
+</style>
+
