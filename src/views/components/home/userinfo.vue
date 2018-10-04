@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     getFollowNum() {
-      let uid = localStorage.getItem("uid");
+      let uid = localStorage.getItem("sr_uid");
       let that = this
       let url = this.$API.getService("Follow", "GetFollowNum")
 
@@ -237,7 +237,7 @@ export default {
       this.$router.push("/settings")
     },
     judgeAdmin() {
-      let user = JSON.parse(localStorage.getItem("userinfo"))
+      let user = JSON.parse(localStorage.getItem("sr_userinfo"))
       if(user.id == this.uid)
         this.isAdmin = true
     },
@@ -288,7 +288,7 @@ export default {
             that.$set(that.userInfo, i, Uinfo[i])
           }
           //画饼图
-          localStorage.setItem("userinfo", JSON.stringify(Uinfo))
+          localStorage.setItem("sr_userinfo", JSON.stringify(Uinfo))
           that.getUserGoodFileds()
           that.judgeAdmin()
         })

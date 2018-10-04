@@ -61,12 +61,10 @@ export default {
     width: 2rem
     background: #eee
     height: 1.7rem
-    
   .long
     width: 100%
     background: #eee
     height: 1.7rem
-    
   .item
     margin-top: .8rem
   .title

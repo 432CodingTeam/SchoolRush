@@ -13,7 +13,6 @@
           </div>
         </div>
         <lazy-card v-if="!nomore" @onLoading="handleReachBottom" :loaded="isLoading"></lazy-card>
-        
         <!-- 内容部分结束 -->
         <!-- 右侧边栏开始 -->
         <div class="row sidebar-container col-lg-offset-9 col-md-offset-9 col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -27,7 +26,7 @@
 </template>
 
 <script>
-import questionCard from "./question-card.vue";
+import questionCard from "../components/question/question-card.vue";
 import sidebar from "../common/sidebar";
 import lazyCard from "../components/tools/lazy-question-card"
 export default {
@@ -48,17 +47,14 @@ export default {
   },
   methods: {
     getQuestionPage() {
-      console.log(this.$route)
       if(this.$route.path == '/solved') {
         this.pageAction = "getUserSolvedQuestion"
       } else if(this.$route.path == '/solving') {
         this.pageAction = "getUserSolvingQuestion"
       }
-      console.log(this.pageAction)
-      
       const that = this
       const url = this.$API.getService("Question", this.pageAction)
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       this.$API
         .post(url, {
           uid: uid,
@@ -66,7 +62,6 @@ export default {
           num: that.pageNum,
         })
         .then(res => {
-          console.log(res.data.data)
           that.questions = res.data.data
         })
     },
@@ -74,7 +69,7 @@ export default {
       return new Promise(resolve => {
         const that = this
         const url = this.$API.getService("Question", this.pageAction)
-        let uid = parseInt(localStorage.getItem("uid"))
+        let uid = parseInt(localStorage.getItem("sr_uid"))
         this.$API
           .post(url, {
             uid: uid,
@@ -90,7 +85,7 @@ export default {
             　that.questions.push(newData[i])
             }
             newData = null
-            this.isLoading = true      
+            this.isLoading = true
             resolve()
           })
       })
@@ -126,6 +121,7 @@ $bright-blue: #0084ff
   .content-container
     float: none
     padding: 0
+    width: 100%
   .nav-right
     padding-right: .5rem
 @media (max-width: 960px)

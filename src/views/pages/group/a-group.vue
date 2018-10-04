@@ -183,7 +183,7 @@ export default {
     hasJoin() {
       //判断用户是否已加入该小组
       let url = this.$API.getService("Usertogroup", "Inquery")
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
 
       this.$API.post(url, {
         uid: uid,
@@ -200,7 +200,7 @@ export default {
     },
     joinOK() {
       let url = this.$API.getService("Usertogroup", "Add")
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
 
       this.$API.post(url, {
         uid: uid,
@@ -222,7 +222,7 @@ export default {
     },
     quitOK() {
       let url = this.$API.getService("Usertogroup", "Delete")
-      let user = JSON.parse(localStorage.getItem("userinfo"))
+      let user = JSON.parse(localStorage.getItem("sr_userinfo"))
 
       this.$API.post(url, {
         uid: user.id,

@@ -12,6 +12,7 @@
                 </a>
                 <DropdownMenu slot="list">
                   <DropdownItem><router-link to="/index">首页</router-link></DropdownItem>
+                  <DropdownItem><router-link to="/groupSquare">小组</router-link></DropdownItem>
                   <DropdownItem><router-link to="/campus">高校</router-link></DropdownItem>
                 </DropdownMenu>
               </Dropdown>
@@ -92,7 +93,7 @@
 import vSetup from "./setup";
 export default {
   data() {
-    if(!localStorage.getItem("uid")) this.toIndex()
+    if(!localStorage.getItem("sr_uid")) this.toIndex()
     return {
       setupModel: false,
       userInfo: {
@@ -105,9 +106,9 @@ export default {
   },
   methods: {
     quit() {
-      localStorage.removeItem("uid")
-      localStorage.removeItem("userinfo")
-      localStorage.removeItem("token")
+      localStorage.removeItem("sr_uid")
+      localStorage.removeItem("sr_userinfo")
+      localStorage.removeItem("sr_token")
       const url = this.$API.getService("User", "logout")
 
       this.$API.post(url, {name:this.userInfo.name})
@@ -138,12 +139,12 @@ export default {
       this.$router.push("/index")
     },
     getUserInfo(cb) {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       const that = this
 
       this.$API.getUserInfo(uid).then((res) => {
         let Uinfo = res.data.data
-        localStorage.setItem("userinfo", JSON.stringify(Uinfo))
+        localStorage.setItem("sr_userinfo", JSON.stringify(Uinfo))
         that.userInfo = Uinfo
         if(cb) cb()
       })

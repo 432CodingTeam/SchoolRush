@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import questionCard from "./question-card.vue";
+import questionCard from "../components/question/question-card.vue";
 import sidebar from "../common/sidebar";
 import lazyCard from "../components/tools/lazy-question-card"
 export default {
@@ -97,7 +97,7 @@ export default {
     getQuestionPage() {
       const that = this;
       const url = this.$API.getService("Question", "GetTobeSolved"); //"GetPageInformation"
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
       this.$API
         .post(url, {
           uid: uid,
@@ -113,7 +113,7 @@ export default {
       return new Promise(resolve => {
         const that = this;
         const url = this.$API.getService("Question", "getUserQuestion"); //"GetPageInformation"
-        let uid = parseInt(localStorage.getItem("uid"))
+        let uid = parseInt(localStorage.getItem("sr_uid"))
         this.$API
           .post(url, {
             uid: uid,

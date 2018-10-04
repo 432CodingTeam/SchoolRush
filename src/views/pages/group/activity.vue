@@ -104,7 +104,7 @@ export default {
     getUserPassInfo() {
       let url = this.$API.getService("Groupactivity", "getActivityUserPassInfo")
       let aid = this.$route.params.id
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
 
       this.$API.post(url,{
         aid: aid,

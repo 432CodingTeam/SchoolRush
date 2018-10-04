@@ -28,7 +28,6 @@
           <Option v-for="item in labelList" :value="item.id" :key="item.id">{{ item.name }}</Option>
           <Button class="addLabel" type="primary" @click="isAddLabel = true">搜索不到，添加此标签</Button>
         </Select>
-        
         <template>
           <Modal
             class="newLabel"

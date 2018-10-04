@@ -138,7 +138,7 @@ const routers = [
                 meta: {
                     title: 'SchoolRush - 404'
                 },
-                component: (resolve) => require(['./views/pages/404.vue'], resolve),
+                component: (resolve) => require(['./views/pages/404/404.vue'], resolve),
             },
             {
                 path: '/msgCart',
@@ -159,21 +159,21 @@ const routers = [
                 meta: {
                     title: 'SchoolRush - 分享问题成功'
                 },
-                component: (resolve) => require(['./views/questions/submitQuestion.vue'], resolve)
+                component: (resolve) => require(['./views/pages/questions/submitQuestion.vue'], resolve)
             },
             {
                 path: '/editQ',
                 meta: {
                     title: 'SchoolRush - 分享题目'
                 },
-                component: (resolve) => require(['./views/questions/editQuestion.vue'], resolve)
+                component: (resolve) => require(['./views/pages/questions/editQuestion.vue'], resolve)
             },
             {
                 path: '/submitSuccess',
                 meta: {
                     title: 'SchoolRush - 分享成功~'
                 },
-                component: (resolve) => require(['./views/questions/submitQuestion.vue'], resolve)
+                component: (resolve) => require(['./views/pages/questions/submitQuestion.vue'], resolve)
             },
             {
                 path: '/group/:gid/activity/:aid/statistics',
@@ -245,7 +245,7 @@ const routers = [
         meta: {
             title: 'SchoolRush - 404找不到页面~'
         },
-        component: (resolve) => require(['./views/pages/404.vue'], resolve)
+        component: (resolve) => require(['./views/pages/404/404.vue'], resolve)
     },
 ];
-export default routers; 
+export default routers

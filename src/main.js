@@ -46,8 +46,8 @@ router.beforeEach((to, from, next) => {
                 next("/login")
                 return
             } else {
-                localStorage.setItem("uid",res.data.data.id)
-                localStorage.setItem('userinfo', res.data.data)
+                localStorage.setItem("sr_uid",res.data.data.id)
+                localStorage.setItem('sr_userinfo', res.data.data)
                 //正常next
                 next()
                 return

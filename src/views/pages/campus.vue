@@ -154,9 +154,10 @@ export default {
         background: #f9f9f9
   .campus-info
     .badge
+      padding: 0 .5rem
       border-radius: .5rem
-    // .badge:hover
-    //   box-shadow: 0rem .0rem .5rem #777
+      img
+        width: 100%
     .left
       border-right: .1rem solid #e9eaec
     .right

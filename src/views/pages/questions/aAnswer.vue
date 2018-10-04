@@ -32,8 +32,8 @@
   </div>
 </template>
 <script>
-import markdownHtml from "../common/markdown-html"
-import userCard from "../components/msgCart"
+import markdownHtml from "../../common/markdown-html"
+import userCard from "../../components/msgCart"
 export default {
   data() {
     return {
@@ -81,7 +81,7 @@ export default {
       this.collapse = !this.collapse
     },
     hasAgree() {
-      let uid = parseInt(localStorage.getItem('uid'))
+      let uid = parseInt(localStorage.getItem('sr_uid'))
       let aid = this.answer.id
       let url = this.$API.getService("Analysis", "hasAgree")
 

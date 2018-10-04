@@ -48,13 +48,13 @@
 </template>
 <script>
 //引入答题组件
-import answerSelect from "../questions/answerSelect"
-import answerJudge from "../questions/answerJudge"
-import answerBlank from "../questions/answerBlank"
-import comment from "../questions/comments"
+import answerSelect from "../pages/questions/answerSelect"
+import answerJudge from "../pages/questions/answerJudge"
+import answerBlank from "../pages/questions/answerBlank"
+import comment from "../pages/questions/comments"
 import sidebar from "../common/sidebar"
-import answers from "../questions/answer"
-import notFound from "./404"
+import answers from "../pages/questions/answer"
+import notFound from "./404/404"
 
 export default {
   data() {
@@ -127,20 +127,18 @@ export default {
       })
     },
     isUserPassed() {
-      let uid     = localStorage.getItem("uid")
+      let uid     = localStorage.getItem("sr_uid")
       let qid     = this.$route.params.id
-      const that  = this
       const url   = this.$API.getService("Usertoq", "isPassed")
 
       this.$API.post(url, {uid: uid, qid: qid})
-      .then((res) => {
-        
-        that.isPassed = res.data.data
+      .then(res => {
+        this.isPassed = res.data.data
       })
     },
     getMarkedInfo() {
       let url = this.$API.getService("UserMark", "hasMarked")
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
       let qid = this.$route.params.id
 
       this.$API.post(url, {
@@ -159,7 +157,7 @@ export default {
     mark(v) {
       
       let url = this.$API.getService("UserMark", "add")
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
       let qid = this.$route.params.id
 
       this.$API.post(url, {

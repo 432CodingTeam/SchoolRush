@@ -111,7 +111,7 @@ export default {
 
       let that = this
       let url = this.$API.getService("Group", "add")
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
       console.log(this.groupInfo.mid)
       
       this.$API.post(url, {

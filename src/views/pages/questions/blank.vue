@@ -76,7 +76,6 @@ export default {
             trigger: "change"
           }
         ],
-        
         correct: [
           {
             required: true,

@@ -2,7 +2,6 @@
   <div id="a-comment">
     <Row class="a-comment">
       <Col span="15">
-        
           <Poptip class="poptip" trigger="hover" placement="right">
             <router-link :to="'/home/' + user.id">
             <Avatar shape="square" :src="user.avatar" />
@@ -12,14 +11,12 @@
               <user-card :uid="user.id"></user-card>
             </div>
           </Poptip>
-        
       </Col>
       <Col span="8">
         <p class="time">{{ time }}</p>
       </Col>
       <Col class="content" span="24">
         <div class="mask" v-if="collapse"></div>
-        
         <p :class="{'collapse': collapse, 'normal': !collapse}">
           <markdown-html :markdown="comment.content"></markdown-html>
         </p>
@@ -48,9 +45,9 @@
   </div>
 </template>
 <script>
-import formatTime from "../components/tools/formatTime.js"
-import markdownHtml from "../common/markdown-html"
-import userCard from "../components/msgCart"
+import formatTime from "../../components/tools/formatTime.js"
+import markdownHtml from "../../common/markdown-html"
+import userCard from "../../components/msgCart"
 export default {
   data() {
     let Time = formatTime.getDateDiff(this.comment.time)
@@ -93,7 +90,6 @@ export default {
     },
     getAgreeInfo() {
       //获取当前登陆用户对这条评论的支持/反对情况
-      
     }
   },
   props: ["user", "comment"],

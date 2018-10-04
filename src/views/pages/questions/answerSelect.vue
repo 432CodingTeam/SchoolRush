@@ -30,12 +30,11 @@
         <span v-if="!loading">{{ btnText }}</span>
       </Button>
     </p>
-   
   </div>
 </template>
 <script>
 import { mavonEditor } from "mavon-editor"
-import markdownHtml from "../common/markdown-html"
+import markdownHtml from "../../common/markdown-html"
 export default {
   data() {
     return {
@@ -165,7 +164,7 @@ export default {
       }
 
       this.isSubmit = true
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let data = {
         uid: uid,
         qid: this.question.id,
@@ -211,7 +210,7 @@ export default {
         this.btnText = "你已通过，返回"
     },
     getPassedStatus() {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let qid = this.$route.params.id
       let url = this.$API.getService("Usertoq", "isPassed")
 

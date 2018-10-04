@@ -25,7 +25,7 @@
 import io from "socket.io-client"
 export default {
   data() {
-    let userInfo = JSON.parse(localStorage.getItem("userinfo"))
+    let userInfo = JSON.parse(localStorage.getItem("sr_userinfo"))
     return {
       online_num: 0,
       socket_msg: "未连接",
@@ -38,7 +38,7 @@ export default {
   methods: {
     findOpponent() {
       //发送匹配事件给后端
-      let userInfo = JSON.parse(localStorage.getItem("userinfo"))
+      let userInfo = JSON.parse(localStorage.getItem("sr_userinfo"))
       this.socket.emit("find", {username: userInfo.name})
       this.socket_msg = "开始匹配..."
       this.isFindng = true

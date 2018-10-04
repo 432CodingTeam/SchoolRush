@@ -107,7 +107,7 @@ export default {
      getUserCampusRank() {
       let that = this
       let url = this.$API.getService("User", "GetRankAtcampus")
-      let id  = localStorage.getItem("uid")
+      let id  = localStorage.getItem("sr_uid")
 
       this.$API.post(url, {
         id: id

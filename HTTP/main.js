@@ -200,7 +200,7 @@ function checkCookie(token) {
 
 export default {
     getService,
-    get, 
+    get,
     post,
     getUserInfo,
     getAxios,
