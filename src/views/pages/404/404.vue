@@ -2,7 +2,6 @@
   <div class="error-container">
     <div class="nofound">
       <div class="error-panel">
-        
         <div id="nofound-panel">
           <Row>
             <Col span="14">
@@ -14,14 +13,13 @@
             <div id="rollback-btn">
             <router-link to="/index">
               <Button type="primary" size="large" id="btn">返回首页</Button>
-            </router-link>     
+            </router-link>
             </div>
             </Col>
           </Row>
-        </div>  
-        
+        </div>
         <div class="img_nofound">
-          <img src="../../static/img/formula.jpg" alt="" id="formula">
+          <img src="../../../static/img/formula.jpg" alt="" id="formula">
         </div>
       </div>
     </div>
@@ -48,7 +46,7 @@ export default {
   .img_nofound{
     overflow: hidden;
   }
-  #formula{ 
+  #formula{
     width        : 100%;
     height       : 100%;
     border-radius: 15px;

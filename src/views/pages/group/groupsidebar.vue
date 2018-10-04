@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     getUserInfo() {
-      let uid = localStorage.getItem("uid");
+      let uid = localStorage.getItem("sr_uid");
       let url = this.$API.getService("User", "getById");
       let that = this;
 
@@ -97,7 +97,7 @@ export default {
           for(var i in Uinfo) {
             that.$set(that.userInfo, i, Uinfo[i])
           }
-          localStorage.setItem("userinfo", JSON.stringify(Uinfo));
+          localStorage.setItem("sr_userinfo", JSON.stringify(Uinfo));
           for (let i in Uinfo) {
             if (!Uinfo[i]) {
               that.jumpToSettings();
@@ -135,7 +135,7 @@ export default {
       return str
     },
     getFollowNum() {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let that = this
       let url = this.$API.getService("Follow", "GetFollowNum")
 
@@ -147,7 +147,7 @@ export default {
       })
     },
     getFollowerNum() {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let that = this
       let url = this.$API.getService("Follow", "GetFollowerNum")
 

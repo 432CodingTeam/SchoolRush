@@ -7,8 +7,8 @@
   </div>
 </template>
 <script>
-import markdownHtml from "../common/markdown-html"
-import userCard from "../components/msgCart"
+import markdownHtml from "../../common/markdown-html"
+import userCard from "../../components/msgCart"
 import aAnswer from "./aAnswer"
 export default {
   data() {

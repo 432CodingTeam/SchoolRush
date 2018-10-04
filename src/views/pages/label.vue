@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import questionCard from "./question-card.vue";
+import questionCard from "../components/question/question-card.vue";
 import sidebar from "../common/sidebar";
 import lazyCard from "../components/tools/lazy-question-card"
 export default {
@@ -98,7 +98,7 @@ export default {
             　that.questions.push(newData[i]);
             }
             newData = null;
-            this.isLoading = true            
+            this.isLoading = true
             resolve();
           });
       });

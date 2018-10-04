@@ -74,12 +74,12 @@ export default {
       userInfo: {
         campusInfo: {},
       },
-      adminID: localStorage.getItem("uid")
+      adminID: localStorage.getItem("sr_uid")
     }
   },
   methods: {
     follow() {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let url = this.$API.getService("Follow", "Add");
 
       if(uid == this.uid) {
@@ -107,7 +107,7 @@ export default {
       //发送私信
     },
     unFollow() {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let url = this.$API.getService("Follow", "UnFollow");
       this.$API.post(url, {
         uid: uid,
@@ -122,7 +122,7 @@ export default {
       })
     },
     checkFollowed(){
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let url = this.$API.getService("Follow", "IsFollowed");
       this.$API.post(url, {
         uid: uid,

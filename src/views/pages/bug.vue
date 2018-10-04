@@ -87,7 +87,7 @@ export default {
       this.addHistoryLoading = true
 
       let url = this.$API.getService("Bugs", "add")
-      let uid = localStorage.getItem('uid')
+      let uid = localStorage.getItem('sr_uid')
       let data = {
         type: this.type,
         uid: uid,
@@ -124,7 +124,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,700');
   * {
     box-sizing: border-box;

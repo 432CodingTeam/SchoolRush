@@ -5,10 +5,9 @@
       <Button class="tipoff-btn" @click="tipOff" type="warning"><Icon type="alert"></Icon></Button>
     </p>
     <Steps class="steps" :current="current">
-      <Step title="读题" content="认真读题，分析作者意图">
-      </Step>
-      <Step title="分析" content="请写下你的解答过程"></Step>
-      <Step title="给出答案" content="请选择/填写你的答案"></Step>
+        <Step title="读题" content="认真读题，分析作者意图"></Step>
+        <Step title="分析" content="请写下你的解答过程"></Step>
+        <Step title="给出答案" content="请选择/填写你的答案"></Step>
     </Steps>
     <p v-if="current >= 0" class="q-content">
       <markdown-html :markdown="question.q"></markdown-html>
@@ -16,10 +15,9 @@
     <div v-if="current >= 1" class="container editor">
       <mavon-editor class="editor" v-model="analysis" :class="{'close': isEditorClose}" placeholder="记录自己的思考分析过程，不超过3K字..." :toolbars="toolbars" ref=md @imgAdd="$imgAdd" @change="updateMD"></mavon-editor>
     </div>
-    <ul v-if="current == 2">
-      <li class="T" :class="{wrong: wrongs.T,checked: answer=='T'}" @click="checked('T')"><Icon type="checkmark-round"></Icon>正确</li>
-      <li class="F" :class="{wrong: wrongs.F,checked: answer=='F'}" @click="checked('F')"><Icon type="close-round"></Icon>错误</li>
-    </ul>
+    <p v-if="current == 2" class="question">
+      <input type="text" v-model="answer" :disabled="isRight || btnDisable" class="answer" :class="{'answer-right': isRight && !loading}" placeholder="请输入你的答案"> {{ question.q.suf }}
+    </p>
     <p class="btn-wrap">
       <Button v-if="current != 0" class="btn" shape="circle" @click="lastStep">
         <span>上一步</span>
@@ -29,14 +27,11 @@
         <span v-if="!loading">{{ btnText }}</span>
       </Button>
     </p>
-    
-    
-    
   </div>
 </template>
 <script>
 import { mavonEditor } from "mavon-editor"
-import markdownHtml from "../common/markdown-html"
+import markdownHtml from "../../common/markdown-html"
 export default {
   data() {
     return {
@@ -44,10 +39,6 @@ export default {
       isSubmit: false,
       isRight: false,
       isFalse: false,
-      wrongs: {
-        T: false,
-        F: false,
-      },
       loading: false,
       btnType: "info",
       btnText: "下一步",
@@ -89,9 +80,9 @@ export default {
         subfield: true, // 单双栏模式
         preview: true // 预览
       },
-      current: 0,
       passed: false,
-    }
+      current: 0,
+    };
   },
   methods: {
     $imgAdd(pos, $file) {
@@ -114,42 +105,31 @@ export default {
     lastStep() {
       this.current--
     },
-    checked(val) {
-      if(this.isRight || this.btnDisable) return
-      this.resetBtn()
-      this.resetItem()
-      if(val == this.answer){
-        this.answer = ""
-        return
-      }
-      this.answer = val
-    },
     submit() {
       if(this.current != 2) {
         this.current++
         if(this.current == 2 && this.passed) this.btnText = "你已通过，返回"
         return
       }
+      this.answer = this.answer.trim();
       if(this.isRight || this.current == 2 && this.passed) {
         this.back()
         return
       }
-      if(this.answer == "") {
-        this.btnDisable = true
-        let num = 2
-        this.btnText = "请选择选项(3)"
+      if (this.answer == "") {
+        this.btnText = "请填写答案后提交(3)";
+        let num = 2;
+        this.btnDisable = true;
         let timer = setInterval(() => {
-          if(num == 0) {
-            this.resetBtn()
-            this.resetItem()
-            clearInterval(timer)
-            return
+          if (num == 0) {
+            this.resetBtn();
+            clearInterval(timer);
+            return;
           }
-          this.btnText = "请选择选项"
-          this.btnText = this.btnText + "(" + num + ")"
-          num--
-        }, 1000)
-        return
+          this.btnText = "请填写答案后提交" + "(" + num + ")";
+          num--;
+        }, 1000);
+        return;
       }
 
       if(this.analysis.trim().length < 10) {
@@ -162,48 +142,41 @@ export default {
         return
       }
 
-      
-      this.isSubmit = true
-      let uid = localStorage.getItem("uid")
+      //提交数据
+      let uid = localStorage.getItem("sr_uid")
       let data = {
         uid: uid,
-        qid: this.question.id,
-      }
-      if(this.answer == this.question.correct) {
+        qid: this.question.id
+      };
+      if (this.answer == this.question.correct) {
         //用户答题正确
-        data.result = true
-        this.isRight = true
+        data.result = true;
+        this.isRight = true;
       } else {
         //用户答题错误
-        data.result = false
-        this.isFalse = true
+        data.result = false;
+        this.isFalse = true;
       }
-      //将解题过程也带进去
       data.analysis = this.analysis
       this.$emit("onAnswer", data)
     },
-    tipOff() {
-      this.$emit("onTipoff")
-    },
     resetBtn() {
-      this.isSubmit     = false
-      this.isRight      = false
-      this.isFalse      = false
-      this.btnType      = "info"
-      this.btnText      = "提交"
-      this.btnDisable   = false
-      //将选项的红色标记去掉
-      this.wrongs[this.answer] = false
-    },
-    resetItem() {
-      this.$set(this.wrongs, this.answer, "")
+      this.isSubmit   = false
+      this.isRight    = false
+      this.isFalse    = false
+      this.btnType    = "info"
+      this.btnText    = "提交"
+      this.btnDisable = false
     },
     back() {
       this.$router.go(-1)
     },
+    tipOff() {
+      this.$emit("onTipoff")
+    },
     setRight() {
-      this.answer = this.question.correct
-      this.btnType = "success"
+      this.answer  = this.question.correct
+      this.btnType = "success";
       this.isRight = true
       if(this.current != 2)
         this.btnText = "下一步(已通过)"
@@ -211,7 +184,7 @@ export default {
         this.btnText = "你已通过，返回"
     },
     getPassedStatus() {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let qid = this.$route.params.id
       let url = this.$API.getService("Usertoq", "isPassed")
 
@@ -231,7 +204,6 @@ export default {
   watch: {
     current(now) {
       if(now == 2) {
-        if(this.passed) return
         this.btnText = "提交"
       } else {
         this.btnText = "下一步"
@@ -242,44 +214,39 @@ export default {
         this.setRight()
       }
     },
-    answer(now, old) {
-      if(!this.passed) return
-      this.checked(now)
-    },
     handeling(now, old) {
-      if(old == false && now == true) {
+      if (old == false && now == true) {
         //由false变为true
-        this.loading = true
-        return
+        this.loading = true;
+        return;
       }
-      this.loading = false
-      if(this.isFalse)
-        this.wrongs[this.answer] = true
+      this.loading = false;
     },
     loading(now, old) {
-      if(!now && this.isRight) {
+      if (!now && this.isRight) {
         this.btnType = "success"
         this.btnText = "回答正确，返回"
       }
-      if(!now && this.isFalse) {
+      if (!now && this.isFalse) {
         this.btnType = "error"
       }
     },
     isFalse(now, old) {
       //选择错误之后要等待5才能继续
-      if(!old && now) {
-        this.btnText = "回答错误，请重新选择(5)"
-        let num = 5
-        this.btnDisable = true
+      if (now) {
+        this.btnText = "回答错误，请重新作答(5)";
+        let num = 5;
+        this.btnDisable = true;
         let timer = setInterval(() => {
-          if(num == 0) {
-            this.resetBtn()
-            clearInterval(timer)
-            return
+          if (num == 0) {
+            this.resetBtn();
+            this.answer = "";
+            clearInterval(timer);
+            return;
           }
-          this.btnText = "回答错误，请重新选择" + "(" + num + ")"
-          num--
-        }, 1000)
+          this.btnText = "回答错误，请重新作答" + "(" + num + ")";
+          num--;
+        }, 1000);
       }
     }
   },
@@ -287,7 +254,7 @@ export default {
     markdownHtml,
     mavonEditor
   },
-}
+};
 </script>
 <style lang="sass">
 #select
@@ -305,32 +272,28 @@ export default {
     font-size: 2.2rem
     padding-bottom: 1rem
     border-bottom: .1rem solid #e7e7e7
-  ul
-    li
-      width: 100%
-      margin: 1rem 0
-      font-size: 2rem
-      border: .2rem solid #fff
-      background: #2d8cf0
-      color: #fff
-      padding: 1.5rem 3rem
-      border-radius: 4rem
-      cursor: pointer
-    li:hover
-      background: #5cadff
-    li.checked
-      background: #19be6b
-    li.checked:hover
-      background: #19be6b
-    li.wrong
-      background: #ed3f14
-    li.wrong:hover
-      background: #ed3f14
-    li
-      i
-        margin-top: .3rem
-        padding-right: .5rem
-        margin-right: .5rem
+  p.question
+    width: 100%
+    margin: 1rem 0
+    font-size: 2rem
+    border: .2rem solid #fff
+    padding: 1.5rem 3rem
+    cursor: pointer
+    text-align: center
+  input
+    width: 100%
+    text-align: center
+    border: none
+    background: #2d8cf0
+    padding: 1rem 2rem
+    border-radius: .4rem
+    color: #fff
+  input:focus
+    outline: none
+  input.wrong
+    background: #ff9900
+  input.answer-right
+    background: #19be6b
   p.btn-wrap
     text-align: center
     button.btn
@@ -351,5 +314,14 @@ export default {
       border-radius: .5rem
   .tipoff-btn
     margin-left: 1rem
+
+  input.answer::-webkit-input-placeholder
+      color: #efefef
+  input.answer:-moz-placeholder
+      color: #efefef
+  input.answer::-moz-placeholder
+      color: #efefef
+  input.answer:-ms-input-placeholder
+      color: #efefef
 </style>
 

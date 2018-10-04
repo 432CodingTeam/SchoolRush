@@ -184,14 +184,14 @@ export default {
       this.userInfo.avatar = imgData
     },
     getUserInfo() {
-      let uid = localStorage.getItem("uid")
+      let uid = localStorage.getItem("sr_uid")
       let url = this.$API.getService("User", "getById")
       let that = this
 
       this.$API.post(url, {id:uid})
       .then((res) => {
         let Uinfo = res.data.data
-        localStorage.setItem("userinfo", JSON.stringify(Uinfo))
+        localStorage.setItem("sr_userinfo", JSON.stringify(Uinfo))
         if(!Uinfo.vice) //防止多选select出错
           Uinfo.vice = []
         else {

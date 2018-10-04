@@ -111,7 +111,7 @@ export default {
           //保存用户id 与token信息
           if(res.data.data) {
             let data = res.data.data
-            localStorage.setItem("uid", data.uid)
+            localStorage.setItem("sr_uid", data.uid)
             localStorage.setItem("sr_token", data.token)
             //设置token 3天过期
             this.setCookie('sr_token', data.token, this.tokenExpDays) 
@@ -196,7 +196,7 @@ export default {
           return
         }
         //保存用户id 与token信息
-        localStorage.setItem("uid", res.data.data.id)
+        localStorage.setItem("sr_uid", res.data.data.id)
         localStorage.setItem("sr_token", res.data.data.token)
         //设置cookie
         this.setCookie('sr_token', data.token, this.tokenExpDays) 
@@ -282,8 +282,8 @@ export default {
       .then(res => {
         if(!res.data.data) return
 
-        localStorage.setItem("uid",res.data.data.id)
-        localStorage.setItem('userinfo', res.data.data)
+        localStorage.setItem("sr_uid",res.data.data.id)
+        localStorage.setItem('sr_userinfo', res.data.data)
 
         this.$router.replace("/index")
       })

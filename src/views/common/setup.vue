@@ -33,10 +33,10 @@
   </div>
 </template>
 <script>
-import vSelect from "../questions/select"
-import vJudge from "../questions/judge"
-import vBlank from "../questions/blank"
-import editQ from "../questions/editQuestion"
+import vSelect from "../pages/questions/select"
+import vJudge from "../pages/questions/judge"
+import vBlank from "../pages/questions/blank"
+import editQ from "../pages/questions/editQuestion"
 import utils from "../components/tools/utils"
 import sidebar from "../common/sidebar"
 export default {
@@ -55,7 +55,7 @@ export default {
     handelSubmit(question) {
       let Question = utils.copy(question);
       //添加问题
-      let uid = parseInt(localStorage.getItem("uid"));
+      let uid = parseInt(localStorage.getItem("sr_uid"));
 
       Question.uid = uid;
 

@@ -96,7 +96,7 @@ export default {
         this.$Message.warning("字数太少，至少10字")
         return
       }
-      let uid = parseInt(localStorage.getItem("uid"))
+      let uid = parseInt(localStorage.getItem("sr_uid"))
       let data = {
         uid: uid,
         qid: this.qid,
